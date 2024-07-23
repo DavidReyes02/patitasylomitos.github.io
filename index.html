@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Veterinaria</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .navbar {
+            background-image: url('../patitas.webp'); /* Cambia la URL por la ubicación de tu imagen */
+            background-size: 1550px; /* Ajusta el tamaño de la imagen para cubrir toda la barra de navegación */
+            background-position: center; /* Centra la imagen en la barra de navegación */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: #1b0f0f;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 30px;
+            margin: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color del hover para mayor visibilidad sobre la imagen */
+        }
+
+        .navbar-nav .nav-item .nav-link.active {
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color del botón activo */
+        }
+
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="%23ffffff" stroke-width="2" d="M5 7h20M5 15h20M5 23h20"/%3E%3C/svg%3E');
+        }
+
+
+        .list-group-item {
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .list-group-item:hover {
+            background-color: #e9ecef;
+            transform: scale(1.02);
+        }
+
+        footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        table img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .form-group img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+        }
+        /* Estilo adicional para la barra de navegación */
+.navbar-nav.ml-auto {
+    margin-left: auto;
+}
+
+.nav-link {
+    cursor: pointer;
+    color: #007bff; /* Cambia el color si es necesario */
+}
+
+.nav-link:hover {
+    color: #0056b3; /* Cambia el color al pasar el ratón si es necesario */
+}
+
+.nav-link i {
+    margin-right: 5px; /* Espacio entre el icono y el texto */
+}
+
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Clínica Veterinaria “Patitas y lomitos felices”</h1>
+        <nav class=" navbar-expand-lg navbar-light bg-light">
+           
+            <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="profileLink"><i class="fas fa-user"></i> Ver Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="generalCareDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-paw"></i> Cuidado General
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="generalCareDropdown">
+                            <a class="dropdown-item" href="#" data-target="home"><i class="fas fa-home"></i> Inicio</a>
+                            <a class="dropdown-item" href="#" data-target="pet-care"><i class="fas fa-heartbeat"></i> Cuidado General</a>
+                            <a class="dropdown-item" href="#" data-target="exercise"><i class="fas fa-dumbbell"></i> Ejercicio y Actividad Física</a>
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="emergencyContactsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-phone-alt"></i> Contactos de Emergencia
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="emergencyContactsDropdown">
+                            <a class="dropdown-item" href="#" data-target="emergency-contacts"><i class="fas fa-phone"></i> Contactos de Emergencia</a>
+                            <a class="dropdown-item" href="#" data-target="insurance"><i class="fas fa-shield-alt"></i> Seguros para Mascotas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="groomingDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-shower"></i> Cuidado e Higiene
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="groomingDropdown">
+                            <a class="dropdown-item" href="#" data-target="grooming"><i class="fas fa-spa"></i> Cuidado e Higiene</a>
+                            <a class="dropdown-item" href="#" data-target="behavior"><i class="fas fa-paw"></i> Comportamiento</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="nutritionDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-utensils"></i> Nutrición y Dieta
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="nutritionDropdown">
+                            <a class="dropdown-item" href="#" data-target="nutrition"><i class="fas fa-apple-alt"></i> Nutrición y Dieta</a>
+                            <a class="dropdown-item" href="#" data-target="dangerous-foods"><i class="fas fa-exclamation-triangle"></i> Alimentos Peligrosos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="emergencyGuideDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-book-medical"></i> Guía de Emergencia
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="emergencyGuideDropdown">
+                            <a class="dropdown-item" href="#" data-target="first-aid"><i class="fas fa-briefcase-medical"></i> Guía de Primeros Auxilios</a>
+                            <a class="dropdown-item" href="#" data-target="emergency-guide"><i class="fas fa-notes-medical"></i> Guía de Emergencia</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="symptomsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-file-medical"></i> Registro de Síntomas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="symptomsDropdown">
+                            <a class="dropdown-item" href="#" data-target="symptoms"><i class="fas fa-notes-medical"></i> Registro de Síntomas</a>
+                            <a class="dropdown-item" href="#" data-target="checkups"><i class="fas fa-stethoscope"></i> Chequeos Regulares</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container my-5">
+        <div id="home" class="content-section active">
+            <h2>Bienvenido</h2>
+            <p>Bienvenido a la clínica veterinaria “Patitas y lomitos felices”. Aquí encontrarás recursos y asistencia para cuidar de tu mascota.</p>
+            <img src="..//ANIMALES.jpeg" alt="Clínica Veterinaria" width="800">
+        </div>
+        <div id="symptoms" class="content-section">
+            <h2>Registro de Síntomas</h2>
+            <p>Registro de síntomas para mascotas. Completa el siguiente formulario para registrar los síntomas de tu mascota.</p>
+            <form id="symptomForm">
+                <div class="form-group">
+                    <label for="petName">Nombre de la Mascota</label>
+                    <input type="text" class="form-control" id="petName" placeholder="Nombre de la mascota" required>
+                </div>
+                <div class="form-group">
+                    <label for="symptom">Síntoma</label>
+                    <textarea class="form-control" id="symptom" rows="3" placeholder="Describe el síntoma" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar Síntoma</button>
+            </form>
+            <h3>Lista de Síntomas Registrados</h3>
+            <table id="symptomsTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre de la Mascota</th>
+                        <th>Síntoma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se agregarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+        <div id="pet-care" class="content-section">
+            <h2>Cuidado General</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Visitas regulares al veterinario.</li>
+                <li class="list-group-item">Mantén sus vacunas al día.</li>
+                <li class="list-group-item">Proporciónale una dieta equilibrada.</li>
+                <li class="list-group-item">Asegúrate de que haga ejercicio diariamente.</li>
+                <li class="list-group-item">Cepilla su pelaje con regularidad.</li>
+            </ul>
+            <p>Consejos y guías para el cuidado general de tu mascota.</p>
+            <img src="..//cuidados.jpg" alt="Cuidado General">
+        </div>
+        <div id="exercise" class="content-section">
+            <h2>Ejercicio y Actividad Física</h2>
+            <p>Guía para mantener a tu mascota activa y saludable.</p>
+            <ul class="list-group">
+                <li class="list-group-item">Paseos diarios de al menos 30 minutos.</li>
+                <li class="list-group-item">Juegos interactivos como lanzar la pelota o el frisbee.</li>
+                <li class="list-group-item">Sesiones de entrenamiento con recompensas.</li>
+                <li class="list-group-item">Proporcionar juguetes para masticar y jugar.</li>
+            </ul>
+            <img src="..//ejercicio.gif" alt="Ejercicio y Actividad Física">
+        </div>
+        <div id="emergency-contacts" class="content-section">
+            <h2>Contactos de Emergencia</h2>
+            <p>Lista de contactos de emergencia para tu mascota.</p>
+            <table class="table">
+                <thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Teléfono</th>
+                                <th>Relación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dr. Juan Pérez</td>
+                                <td>+34 123 456 789</td>
+                                <td>Veterinario</td>
+                            </tr>
+                            <tr>
+                                <td>Clínica Veterinaria Central</td>
+                                <td>+34 987 654 321</td>
+                                <td>Clínica 24h</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </thead>
+                <tbody id="emergencyContactsTable">
+                    <!-- Las filas se agregarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+        <div id="insurance" class="content-section">
+            <h2>Seguros para Mascotas</h2>
+            <p>Información sobre seguros para mascotas.</p>
+            <p>Considera asegurar a tu mascota para estar preparado ante cualquier eventualidad. Algunas opciones populares incluyen:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Seguro de Salud Veterinario.</li>
+                <li class="list-group-item">Seguro de Responsabilidad Civil.</li>
+                <li class="list-group-item">Cobertura de Accidente y Enfermedad.</li>
+            </ul>
+        </div>
+        <div id="grooming" class="content-section">
+            <h2>Cuidado e Higiene</h2>
+            <p>Consejos para el cuidado e higiene de tu mascota.</p>
+            <p>El cuidado e higiene de tu mascota es fundamental para su bienestar. Algunos consejos incluyen:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Cepillar los dientes de tu mascota regularmente.</li>
+                <li class="list-group-item">Baños mensuales con productos específicos para mascotas.</li>
+                <li class="list-group-item">Corte de uñas cada pocas semanas.</li>
+                <li class="list-group-item">Revisar y limpiar las orejas.</li>
+            </ul>
+            <img src="..//cuidado.gif" alt="Cuidado e Higiene">
+        </div>
+        <div id="behavior" class="content-section">
+            <h2>Comportamiento</h2>
+            <p>Guía sobre el comportamiento de las mascotas y cómo manejarlas.</p>
+            <p>Entender y manejar el comportamiento de tu mascota puede mejorar su calidad de vida. Algunos puntos a considerar son:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Socialización temprana con otros animales y personas.</li>
+                <li class="list-group-item">Establecer rutinas y límites claros.</li>
+                <li class="list-group-item">Uso de refuerzos positivos durante el entrenamiento.</li>
+                <li class="list-group-item">Identificar y abordar problemas de comportamiento temprano.</li>
+            </ul>
+            <img src="..//comportamiento.jpg" alt="Comportamiento" width = "450">
+        </div>
+        <div id="nutrition" class="content-section">
+            <h2>Nutrición y Dieta</h2>
+            <p>Consejos sobre la nutrición y dieta adecuada para tu mascota.</p>
+            <p>Una buena nutrición es esencial para la salud de tu mascota. Algunas recomendaciones incluyen:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Proporcionar alimentos balanceados y de alta calidad.</li>
+                <li class="list-group-item">Evitar alimentos con aditivos y conservantes.</li>
+                <li class="list-group-item">Consultar con el veterinario sobre las necesidades dietéticas específicas.</li>
+                <li class="list-group-item">Mantener una rutina de alimentación regular.</li>
+            </ul>
+            <img src="..//alimentos.png" alt="Nutricion">
+        </div>
+        <div id="dangerous-foods" class="content-section">
+            <h2>Alimentos Peligrosos</h2>
+            <p>Lista de alimentos peligrosos para tu mascota.</p>
+            <p>Algunos alimentos pueden ser peligrosos para tu mascota. Evita darles:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Chocolate</li>
+                <li class="list-group-item">Uvas y pasas</li>
+                <li class="list-group-item">Cebolla y ajo</li>
+                <li class="list-group-item">Alcohol</li>
+                <li class="list-group-item">Cafeína</li>
+            </ul>
+            <img src="..//alimentos.jpeg" alt="Nutricion" width = "450">
+        </div>
+        <div id="first-aid" class="content-section">
+            <h2>Guía de Primeros Auxilios</h2>
+            <p>Guía básica de primeros auxilios para mascotas.</p>
+            <p>En caso de emergencia, sigue estos pasos para proporcionar primeros auxilios a tu mascota:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Mantén la calma y asegúrate de que tu mascota esté en un lugar seguro.</li>
+                <li class="list-group-item">Evalúa la situación y verifica los signos vitales (respiración, pulso).</li>
+                <li class="list-group-item">Aplica presión sobre cualquier herida para detener el sangrado.</li>
+                <li class="list-group-item">Consulta a un veterinario lo antes posible.</li>
+            </ul>
+        </div>
+        <div id="emergency-guide" class="content-section">
+            <h2>Guía de Emergencia</h2>
+            <p>Pasos a seguir en caso de emergencia.</p>
+            <p>En caso de emergencia, sigue estos pasos para proporcionar ayuda inmediata a tu mascota:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Identifica el tipo de emergencia (herida, envenenamiento, golpe de calor, etc.).</li>
+                <li class="list-group-item">Mantén la calma y sigue las instrucciones de primeros auxilios.</li>
+                <li class="list-group-item">Contacta a un veterinario de inmediato y proporciona la mayor cantidad de información posible.</li>
+                <li class="list-group-item">Transporta a tu mascota con cuidado al veterinario.</li>
+            </ul>
+            
+        </div>
+        <div id="checkups" class="content-section">
+            <h2>Chequeos Regulares</h2>
+            <p>Importancia de los chequeos regulares para la salud de tu mascota.</p>
+            <p>Realiza chequeos regulares para asegurarte de que tu mascota esté en buena salud. Algunas recomendaciones incluyen:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Revisiones anuales con el veterinario.</li>
+                <li class="list-group-item">Vacunación al día.</li>
+                <li class="list-group-item">Desparasitación regular.</li>
+                <li class="list-group-item">Exámenes de sangre y análisis de orina.</li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Clínica Veterinaria “Patitas y lomitos felices”. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navLinks = document.querySelectorAll('.navbar-nav .dropdown-item');
+            const sections = document.querySelectorAll('.content-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const target = event.target.getAttribute('data-target');
+
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === target) {
+                            section.classList.add('active');
+                        }
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    event.target.classList.add('active');
+                });
+            });
+
+            const symptomForm = document.getElementById('symptomForm');
+            const symptomsTable = document.getElementById('symptomsTable').querySelector('tbody');
+
+            symptomForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const petName = document.getElementById('petName').value;
+                const symptom = document.getElementById('symptom').value;
+
+                let symptoms = JSON.parse(localStorage.getItem('symptoms')) || [];
+                symptoms.push({ petName, symptom });
+                localStorage.setItem('symptoms', JSON.stringify(symptoms));
+
+                updateSymptomsTable();
+                symptomForm.reset();
+            });
+
+            function updateSymptomsTable() {
+                symptomsTable.innerHTML = '';
+                let symptoms = JSON.parse(localStorage.getItem('symptoms')) || [];
+                symptoms.forEach(({ petName, symptom }) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${petName}</td>
+                        <td>${symptom}</td>
+                    `;
+                    symptomsTable.appendChild(row);
+                });
+            }
+
+            updateSymptomsTable(); // Inicializa la tabla con los datos almacenados
+
+            // Agregar contactos de emergencia dinámicamente
+            const emergencyContactsTable = document.getElementById('emergencyContactsTable');
+            const emergencyContacts = JSON.parse(localStorage.getItem('emergencyContacts')) || [];
+            emergencyContacts.forEach(({ name, phone, address }) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${name}</td>
+                    <td>${phone}</td>
+                    <td>${address}</td>
+                `;
+                emergencyContactsTable.appendChild(row);
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const navLinks = document.querySelectorAll('.nav-link[data-target]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        });
+        document.getElementById('logoutButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el enlace realice la acción por defecto
+            
+            // Aquí puedes añadir la lógica para cerrar sesión
+            // Por ejemplo, redirigir a una página de login o eliminar tokens de sesión
+    
+            alert('Has cerrado sesión.'); // Mensaje de confirmación (opcional)
+            window.location.href = 'login.html'; // Redirige a la página de login o a la página deseada
+        });
+        
+        document.getElementById('profileLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el enlace realice la acción por defecto
+    
+            // Aquí puedes añadir la lógica para mostrar la vista de perfil
+            // Por ejemplo, redirigir a una página de perfil
+    
+            window.location.href = 'profile.html'; // Redirige a la página de perfil o a la página deseada
+        });
+    </script>
+</body>
+</html>
+
+
+

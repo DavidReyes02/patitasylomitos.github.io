@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px; /* Tamaño reducido */
+            height: 100px; /* Tamaño reducido */
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        .profile-header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .profile-header p {
+            margin: 0.5rem 0;
+            color: #777;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #004080;
+        }
+        .pet-photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .pet-photo {
+            width: 80px; /* Tamaño reducido */
+            height: 80px; /* Tamaño reducido */
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .pet-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .pet-photo:hover {
+            transform: scale(1.1);
+        }
+        .info-item {
+            margin-bottom: 1rem;
+        }
+        .info-item label {
+            font-weight: bold;
+            color: #333;
+        }
+        .info-item p {
+            margin: 0;
+            color: #555;
+        }
+        .info-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info-item ul li {
+            margin-bottom: 0.5rem;
+        }
+        .info-item ul li::before {
+            content: "• ";
+            color: #004080;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #004080;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .pet-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .pet-info h3 {
+            margin: 0;
+        }
+        .pet-info .details {
+            margin-left: 1rem;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            background-color: #004080;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #003366;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="profile" class="container">
+        <!-- Botón de Volver al Inicio -->
+        <a href="index.html" class="back-button">
+            <i class="fas fa-home"></i> Volver al Inicio
+        </a>
+
+        <!-- Header del perfil -->
+        <div class="profile-header">
+            <img src="../perfil.jpeg" alt="Foto de perfil">
+            <div>
+                <h1>Juan Pérez</h1>
+                <p>Correo: juan.perez@example.com</p>
+                <p>Teléfono: +34 123 456 789</p>
+                <p>Dirección: Calle Ficticia, 123, Madrid, España</p>
+            </div>
+        </div>
+
+        <!-- Fotos de las mascotas -->
+        <div class="section">
+            <h2>Mis Mascotas</h2>
+            <div class="pet-photos">
+                <div class="pet-photo" onclick="showPetInfo('rex')">
+                    <img src="../rex.webp" alt="Foto de Rex">
+                </div>
+                <div class="pet-photo" onclick="showPetInfo('xochitl')">
+                    <img src="../gato.jpg" alt="Foto de Xochitl">
+                </div>
+                <div class="pet-photo" onclick="showPetInfo('iguano')">
+                    <img src="../iguana.jpeg" alt="Foto de Iguano">
+                </div>
+                <div class="pet-photo" onclick="showPetInfo('pequenin')">
+                    <img src="../tarantula.jpeg" alt="Foto de Pequeñín">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información del Perro -->
+    <div id="rex" class="container hidden">
+        <button class="back-button" onclick="showProfile()">Volver al Perfil</button>
+        <div class="info-item pet-info">
+            <img src="../rex.webp" alt="Foto de Rex" class="pet-photo">
+            <div class="details">
+                <h3>Rex (Perro)</h3>
+                <h4>Visitas al Veterinario:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo de Visita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01/01/2024</td>
+                            <td>Consulta General</td>
+                        </tr>
+                        <tr>
+                            <td>15/03/2024</td>
+                            <td>Vacunación</td>
+                        </tr>
+                        <tr>
+                            <td>10/06/2024</td>
+                            <td>Revisión de Salud</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Vacunas:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vacuna</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vacuna contra la rabia</td>
+                            <td>01/01/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Vacuna polivalente</td>
+                            <td>15/03/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Vacuna contra la leptospirosis</td>
+                            <td>10/06/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Desparasitaciones:</h4>
+                <ul>
+                    <li>01/01/2024 - Desparasitación interna</li>
+                    <li>15/03/2024 - Desparasitación externa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información de la Gata -->
+    <div id="xochitl" class="container hidden">
+        <button class="back-button" onclick="showProfile()">Volver al Perfil</button>
+        <div class="info-item pet-info">
+            <img src="../gato.jpg" alt="Foto de Xochitl" class="pet-photo">
+            <div class="details">
+                <h3>Xochitl (Gata)</h3>
+                <h4>Visitas al Veterinario:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo de Visita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>02/01/2024</td>
+                            <td>Consulta General</td>
+                        </tr>
+                        <tr>
+                            <td>20/03/2024</td>
+                            <td>Vacunación</td>
+                        </tr>
+                        <tr>
+                            <td>12/06/2024</td>
+                            <td>Revisión de Salud</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Vacunas:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vacuna</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vacuna contra la rabia</td>
+                            <td>02/01/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Vacuna trivalente</td>
+                            <td>20/03/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Vacuna contra la leucemia felina</td>
+                            <td>12/06/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Desparasitaciones:</h4>
+                <ul>
+                    <li>02/01/2024 - Desparasitación interna</li>
+                    <li>20/03/2024 - Desparasitación externa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información de la Iguana -->
+    <div id="iguano" class="container hidden">
+        <button class="back-button" onclick="showProfile()">Volver al Perfil</button>
+        <div class="info-item pet-info">
+            <img src="../iguana.jpeg" alt="Foto de Iguano" class="pet-photo">
+            <div class="details">
+                <h3>Iguano (Iguana)</h3>
+                <h4>Visitas al Veterinario:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo de Visita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>03/01/2024</td>
+                            <td>Consulta General</td>
+                        </tr>
+                        <tr>
+                            <td>25/03/2024</td>
+                            <td>Vacunación</td>
+                        </tr>
+                        <tr>
+                            <td>14/06/2024</td>
+                            <td>Revisión de Salud</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Vacunas:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vacuna</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vacuna contra la salmonelosis</td>
+                            <td>03/01/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Vacuna contra la pseudomonas</td>
+                            <td>25/03/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Desparasitaciones:</h4>
+                <ul>
+                    <li>03/01/2024 - Desparasitación interna</li>
+                    <li>25/03/2024 - Desparasitación externa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información de la Tarantula -->
+    <div id="pequenin" class="container hidden">
+        <button class="back-button" onclick="showProfile()">Volver al Perfil</button>
+        <div class="info-item pet-info">
+            <img src="../tarantula.jpeg" alt="Foto de Pequeñín" class="pet-photo">
+            <div class="details">
+                <h3>Pequeñín (Tarántula)</h3>
+                <h4>Visitas al Veterinario:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo de Visita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>04/01/2024</td>
+                            <td>Consulta General</td>
+                        </tr>
+                        <tr>
+                            <td>30/03/2024</td>
+                            <td>Revisión de Salud</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Desparasitaciones:</h4>
+                <ul>
+                    <li>04/01/2024 - Desparasitación interna</li>
+                    <li>30/03/2024 - Desparasitación externa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPetInfo(petId) {
+            document.getElementById('profile').classList.add('hidden');
+            document.getElementById(petId).classList.remove('hidden');
+        }
+
+        function showProfile() {
+            document.querySelectorAll('.container').forEach(container => {
+                container.classList.add('hidden');
+            });
+            document.getElementById('profile').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
